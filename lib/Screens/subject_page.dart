@@ -8,9 +8,9 @@ import '../api/pdf_firebase.dart';
 import '../constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class SubjectPage extends StatefulWidget {
   static const String id="subject screen";
@@ -41,6 +41,7 @@ class _SubjectPageState extends State<SubjectPage> {
     return ModalProgressHUD(
       inAsyncCall: _loading,
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(title: Text(widget.subject, style: TextStyle(
           color: Colors.black,
@@ -265,8 +266,14 @@ class _SubjectPageState extends State<SubjectPage> {
   }
 
   void openPDF(BuildContext context, File file) {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
+    try {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
+    }
+    catch(e)
+    {
+      print(e);
+    }
     setState(() {
       _loading=false;
     });
