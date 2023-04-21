@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>488060663509-a0t6v8ngui1ot6b03b890gkrtkvfjapo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.488060663509-a0t6v8ngui1ot6b03b890gkrtkvfjapo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBpUy-OCRftNdjJ_3CdO43z4iUsFkPno34</string>
+	<key>GCM_SENDER_ID</key>
+	<string>488060663509</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>brain-app</string>
+	<key>PROJECT_ID</key>
+	<string>brain-boost-ab012</string>
+	<key>STORAGE_BUCKET</key>
+	<string>brain-boost-ab012.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:488060663509:ios:b0314eace8df6c1c61945c</string>
+</dict>
+</plist>

@@ -21,17 +21,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        HomePage.id:(context) => HomePage(),
-        LoginPage.id:(context) => LoginPage(),
-        RegisterPage.id:(context) => RegisterPage(),
-        WorkbenchPage.id:(context) => WorkbenchPage(),
-        SubjectPage.id:(context) => SubjectPage(subject: '',color: Colors.grey,subjectFolder: '', ),
-        TasksPage.id:(context) => TasksPage(status: '',color:Colors.grey,user_email: ''),
-      },
-      initialRoute: HomePage.id,
-    );
-  }
-}
+            debugShowCheckedModeBanner: false,
+            routes: {
+              HomePage.id: (context) => HomePage(),
+              LoginPage.id: (context) => LoginPage(),
+              RegisterPage.id: (context) => RegisterPage(),
+              WorkbenchPage.id: (context) => WorkbenchPage(),
+              SubjectPage.id: (context) =>
+                  SubjectPage(
+                    subject: '', color: Colors.grey, subjectFolder: '',),
+              TasksPage.id: (context) =>
+                  TasksPage(status: '', color: Colors.grey, user_email: ''),
+            },
+            initialRoute: HomePage.id,
+          );
+        }
+      }
 
