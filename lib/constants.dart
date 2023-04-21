@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const  List algo=[
-  ['DP 1.pdf','DP 2.pdf','DP 3.pdf','Divide and conquer+DP.pdf','Divide and conquer.pdf',
-    'Edit Distance.pdf','Exam summery.pdf','Exercises.pdf','Greedy 2.pdf','Greedy.pdf','Moodle tests.pdf'],
+  ['Approximation algorithm.pdf','Greedy- Activities.pdf','Greedy-Hofman.pdf','Knapsack Problem.pdf','LCM.pdf',
+    'Majority Vote Algorithm.pdf','Matrix Multiplication.pdf','Min&Max.pdf','Minimum Spanning Tree.pdf','Randomize.pdf'],
   ['Dp.pdf','Dp 2.pdf','Greedy.pdf','KMP 1.pdf','KMP 2.pdf','KMP 3.pdf','Majority problem.pdf',
     'Random Algorithems.pdf','Vertex cover.pdf','The second largest.pdf'],
   ['DP 1.pdf','DP 2.pdf','DP 3.pdf','Divide and conquer+DP.pdf','Divide and conquer.pdf',
