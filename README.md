@@ -29,6 +29,6 @@
 ## In Action 👀
 <p align="center">
   <a href="https://github.com/Singh-Shivani/Food_Lab">
-    <img src="AppScreensAndPoster/FoodLab_App_gif.gif" alt="Logo" height="540"> 
+    <img src="AppScreensAndPoster/video.gif" alt="Logo" height="540"> 
   </a>
 </p>
