@@ -10,7 +10,7 @@
   
 ## About the App 🧠
 
-  - FoodLab is a App to view summaries and optimize learning with tracking if you want 🤤!
+  - Brain Boost is a App to view summaries and optimize learning with tracking if you want 🤤!
   
   - Login or SignUp using any account (P.S. Your credentials are safe!) 🤩 and this will lead you to the feed page.
   
@@ -28,7 +28,7 @@
 
 ## In Action 👀
 <p align="center">
-  <a href="https://github.com/Singh-Shivani/Food_Lab">
+  <a href="https://github.com/carmelBar24/brain">
     <img src="AppScreensAndPoster/brain_app_video.gif" alt="Logo" height="540"> 
   </a>
 </p>
