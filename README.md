@@ -29,6 +29,6 @@
 ## In Action 👀
 <p align="center">
   <a href="https://github.com/Singh-Shivani/Food_Lab">
-    <video src="AppScreensAndPoster/brain_video.mp4" alt="Logo" height="540"> 
+    <img src="AppScreensAndPoster/brain_app_video.gif" alt="Logo" height="540"> 
   </a>
 </p>
