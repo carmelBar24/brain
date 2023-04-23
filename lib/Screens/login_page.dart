@@ -4,8 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
 import '../Widgets/button.dart';
+
 
 class LoginPage extends StatefulWidget {
   static const String id = "login screen";
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   String passfailtext = '';
   String emailfailtext = '';
   bool _loading=false;
+  final _Google_sign_in=GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -141,6 +143,24 @@ class _LoginPageState extends State<LoginPage> {
                                         user_password = value;
                                       }),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:16.0,top:16.0),
+                                  child: Text(
+                                    'Or continue with',
+                                    style: TextStyle(
+                                        color: Colors.grey.shade500,
+                                        decoration: TextDecoration.none,
+                                        fontSize: 14.0,
+                                        fontFamily: 'mainFont'),
+                                  ),
+                                ),
+                               Padding(
+                                 padding: const EdgeInsets.only(left:16.0),
+                                 child: Card(elevation: 5,child: TextButton(onPressed: (){
+                                   _Google_sign_in.signIn().then((value){Navigator.pushNamed(context, WorkbenchPage.id);
+                                   }).onError((error, stackTrace) {print(error);});},child:SizedBox(child: Image.asset('images/google.png',fit: BoxFit.cover),height: 40,width: 40,))),
+                               )
+
                               ],
                             ),
                           ),

@@ -3,10 +3,15 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'dart:io';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import '../Widgets/task.dart';
+import '../api/pdf_firebase.dart';
+import '../api/pdf_viewer_page.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 class TasksPage extends StatefulWidget {
   String status;
   static const String id = "tasks screen";
@@ -21,6 +26,7 @@ class TasksPage extends StatefulWidget {
 class _TasksPageState extends State<TasksPage> {
   final _firestore=FirebaseFirestore.instance;
   bool _isLoading = true;
+  bool _openPdf=false;
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1,milliseconds: 850), () {
@@ -93,71 +99,113 @@ class _TasksPageState extends State<TasksPage> {
                    sub_subject: data['sub-subject']));
              });
              if(tasks.isNotEmpty) {
-               return Scaffold(
-                 backgroundColor:Colors.white,
-                 appBar: AppBar(
-                   leading: TextButton(
-                     onPressed: () {
-                       Navigator.pop(context);
-                     },
-                     child: Icon(
-                       Icons.arrow_back_outlined,
-                       color: Colors.white,
-                       size: 30.0,
+               return ModalProgressHUD(
+                 inAsyncCall: _openPdf,
+                 child: Scaffold(
+                   key: _scaffoldKey,
+                   backgroundColor:Colors.white,
+                   appBar: AppBar(
+                     leading: TextButton(
+                       onPressed: () {
+                         Navigator.pop(context);
+                       },
+                       child: Icon(
+                         Icons.arrow_back_outlined,
+                         color: Colors.white,
+                         size: 30.0,
+                       ),
+                     ),
+                     backgroundColor: widget.color,
+                     centerTitle: true,
+                     title: Text(widget.status, style: TextStyle(
+                         color: Colors.black
+                     ),
                      ),
                    ),
-                   backgroundColor: widget.color,
-                   centerTitle: true,
-                   title: Text(widget.status, style: TextStyle(
-                       color: Colors.black
-                   ),
-                   ),
-                 ),
-                 body: Card(
-                   color: Colors.white,
-                   child: Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Scrollbar(
-                       thumbVisibility: true,
-                       thickness: 8,
-                       radius: Radius.circular(4),
-                       child: ListView.builder(
-                           itemCount: tasks.length,
-                           itemBuilder: (context, index) {
-                             return SizedBox(
-                               width: MediaQuery.of(context).size.width,
-                               child: Card(
-                                 color: Colors.white,
-                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                                 borderOnForeground: true,
-                                 shadowColor: widget.color,
-                                 elevation: 8,
-                                 child: ListTile(
-                                   leading: Card(child: Container(
-                                       alignment: Alignment.center,
-                                       child: Text(tasks[index].subject),
-                                       width: MediaQuery.of(context).size.width/3,
-                                       height: 50,
-                                    ),
-                                     elevation: 20,
-                                     shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),)),
-                                   title: Text(tasks[index].title),
-                                   subtitle: Text(tasks[index].sub_subject),
-                                   trailing: IconButton(
-                                       icon: Icon(Icons.delete,color: Colors.black), onPressed: () async {
-                                         print(tasks[index].title);
-                                     await _firestore.collection('tasks').doc(
-                                         '${tasks[index].title}.pdf').delete();
-                                     List<Task> newTasks = List<Task>.from(tasks);
-                                     newTasks.removeAt(index);
-                                     setState(() {
-                                       tasks = newTasks;
-                                     });
-                                   }),
+                   body: Card(
+                     color: Colors.white,
+                     child: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Scrollbar(
+                         thumbVisibility: true,
+                         thickness: 8,
+                         radius: Radius.circular(4),
+                         child: ListView.builder(
+                             itemCount: tasks.length,
+                             itemBuilder: (context, index) {
+                               return SizedBox(
+                                 width: MediaQuery.of(context).size.width,
+                                 child: Card(
+                                   color: Colors.white,
+                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                   borderOnForeground: true,
+                                   shadowColor: widget.color,
+                                   elevation: 8,
+                                   child: ListTile(
+                                     onTap: () async{
+                                       setState(() {
+                                         _openPdf=true;
+                                       });
+                                       try{
+                                       final url = '${tasks[index].subject}/${tasks[index].sub_subject}/' +
+                                           tasks[index].title+'.pdf';
+                                       print(url);
+                                       final file = await PDFApi.loadFirebase(url);
+                                       if (file == null) {
+                                         print('null file');
+                                         return;
+                                       }
+                                       openPDF(context, file);
+                                     }
+                                     catch(e)
+                                       {
+                                         setState(() {
+                                           _openPdf=false;
+                                         });
+                                         String message= 'Error: Something went wrong';
+                                         final snackBar =SnackBar(
+                                           content: Text(
+                                             message,
+                                             style: TextStyle(color: Colors.black),
+                                           ),
+                                           backgroundColor: widget.color,
+                                           action: SnackBarAction(
+                                             label: 'close',
+                                             onPressed: () {
+                                               // Some code to undo the change.
+                                             },
+                                           ),
+                                         );
+                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                                     }
+                                     },
+                                     leading: Card(child: Container(
+                                         alignment: Alignment.center,
+                                         child: Text(tasks[index].subject),
+                                         width: MediaQuery.of(context).size.width/3,
+                                         height: 50,
+                                      ),
+                                       elevation: 20,
+                                       shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),)),
+                                     title: Text(tasks[index].title),
+                                     subtitle: Text(tasks[index].sub_subject),
+                                     trailing: IconButton(
+                                         icon: Icon(Icons.delete,color: Colors.black), onPressed: () async {
+                                           print(tasks[index].title);
+                                       await _firestore.collection('tasks').doc(
+                                           '${tasks[index].title}.pdf').delete();
+                                       List<Task> newTasks = List<Task>.from(tasks);
+                                       newTasks.removeAt(index);
+                                       setState(() {
+                                         tasks = newTasks;
+                                       });
+                                     }),
+                                   ),
                                  ),
-                               ),
-                             );
-                           }
+                               );
+                             }
+                         ),
                        ),
                      ),
                    ),
@@ -220,5 +268,20 @@ class _TasksPageState extends State<TasksPage> {
          return Container(color: Colors.white,);
           }
     );
+  }
+  void openPDF(BuildContext context, File file) {
+    print('im on the print');
+    try {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
+    }
+    catch(e)
+    {
+      print('im on error');
+      print(e);
+    }
+    setState(() {
+      _openPdf=false;
+    });
   }
 }

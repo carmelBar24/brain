@@ -13,7 +13,7 @@ const List autumate=[
   ['Lesson 1.pdf','Lesson 2.pdf','Lesson 3.pdf','Lesson 4.pdf','Lesson 5.pdf','Lesson 6.pdf','Lesson 7.pdf'],
   ['Exercise 1.pdf','Exercise 1 b.pdf','Exercise 2.pdf','Exercise 3.pdf','Exercise 4.pdf','Exercise 5.pdf','Exercise 6.pdf','Exercise 7.pdf',
     'Exercise 8.pdf','Exercise 9.pdf','Exercise 10.pdf','Exercise 11.pdf'],
-  ['Submission work 1.pdf','Submission work 2.pdf','Submission work 3.pdf','OpenU Book.pdf','Haim Shafir.pdf'],
+  ['Submission work 1.pdf','Submission work 2.pdf','Submission work 3.pdf'],
 ];
 const List graph=[
   ['Graph coloring.pdf','Lecture 1+2 Bfs.pdf','Lecture 3+4 Dfs.pdf','Lecture 5 Dfs.pdf','Lecture 6 Dij.pdf','Lecture 7 CPM Bf.pdf','Matching.pdf','Trees.pdf'],

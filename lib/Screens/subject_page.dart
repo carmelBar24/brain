@@ -139,9 +139,9 @@ class _SubjectPageState extends State<SubjectPage> {
                                     'text':subject[currentList][index]
                                   }).then((value) async {
                                 setState(() {
+                                  message='';
                                   _loading=true;
                                 });
-                                print(_loading);
                                 final url = '$subjectName/$folder/' +
                                     subject[currentList][index];
                                 print(url);
@@ -152,25 +152,22 @@ class _SubjectPageState extends State<SubjectPage> {
                                 openPDF(context, file);
                               }).catchError((err) {
                                 setState(() {
+                                  _loading=false;
                                   message= 'Error: Something went wrong';
-                                  final snackBar = buildSnackBar(message);
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 });
+                              }).whenComplete(() {
+                                if(message=='Error: Something went wrong') {
+                                  final snackBar = buildSnackBar(message);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      snackBar);
+                                }
                               });
 
                             }
                             catch(e)
                             {
-                              setState(() {
-                                message= 'Error: Something went wrong';
-                              });
+                              print(e);
                             }
-                            if (message=='Error: Something went wrong')
-                              {
-                                final snackBar =buildSnackBar(message);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    snackBar);
-                              }
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: Colors.black,
@@ -231,6 +228,7 @@ class _SubjectPageState extends State<SubjectPage> {
                                   }
                                   catch(e)
                                   {
+
                                     print(e);
                                   }
                                 }, icon: Icon(Icons.add_alarm,color: Colors.black87,))

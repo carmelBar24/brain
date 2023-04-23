@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "488060663509",
+    "project_id": "brain-boost-ab012",
+    "storage_bucket": "brain-boost-ab012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488060663509:android:7f395b12d74ce28961945c",
+        "android_client_info": {
+          "package_name": "com.example.brain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488060663509-2dcak365dsedp7rap1qnfvoja4ohdfk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brain",
+            "certificate_hash": "a90ec96d7b0edc7df0aa37eda3e1fd27f1dc353c"
+          }
+        },
+        {
+          "client_id": "488060663509-15nsvpc5qjjko9v1tp2bkem5t59oaf8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnABhw1681oH1nY7c3NFgcuuoP7RnzZyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488060663509-15nsvpc5qjjko9v1tp2bkem5t59oaf8e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "488060663509-a0t6v8ngui1ot6b03b890gkrtkvfjapo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "brain-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
